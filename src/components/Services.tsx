@@ -1,4 +1,56 @@
+import React, { useRef, useState } from 'react';
+import { motion, useAnimationFrame, useMotionValue, useTransform } from 'motion/react';
 import { FadeIn } from './FadeIn';
+
+const images = [
+  "https://i.ibb.co/Z6YphM8n/Whats-App-Image-2026-05-02-at-10-47-35-PM.jpg",
+  "https://i.ibb.co/LD81nGM3/Whats-App-Image-2026-05-02-at-10-47-37-PM-1.jpg",
+  "https://i.ibb.co/yKbnNRy/Whats-App-Image-2026-05-02-at-10-47-37-PM-2.jpg",
+  "https://i.ibb.co/PvVBLwG7/Whats-App-Image-2026-05-02-at-10-47-38-PM.jpg",
+  "https://i.ibb.co/QvZ13DL3/Whats-App-Image-2026-05-02-at-10-47-35-PM-1.jpg",
+  "https://i.ibb.co/236Fk5q7/Whats-App-Image-2026-05-02-at-10-47-36-PM.jpg",
+  "https://i.ibb.co/hxP7rMcF/Whats-App-Image-2026-05-02-at-10-47-36-PM-1.jpg",
+  "https://i.ibb.co/Z78cLTH/Whats-App-Image-2026-05-02-at-10-47-37-PM.jpg"
+];
+
+function Marquee() {
+  const baseX = useMotionValue(0);
+  const x = useTransform(baseX, (v) => `${v}%`);
+  const [speed, setSpeed] = useState(1);
+  const currentSpeed = useRef(1);
+
+  useAnimationFrame((t, delta) => {
+    // smooth speed transition
+    currentSpeed.current += (speed - currentSpeed.current) * 0.1;
+    // 50% in 30 seconds = 1.666% per second
+    let moveBy = -1 * (50 / 30) * currentSpeed.current * (delta / 1000);
+    let nextValue = baseX.get() + moveBy;
+    if (nextValue <= -50) {
+      nextValue += 50;
+    }
+    baseX.set(nextValue);
+  });
+
+  return (
+    <div 
+      className="relative flex overflow-hidden w-full max-w-[1000px] mx-auto pb-12 mask-image-fade"
+      onMouseEnter={() => setSpeed(0.15)}
+      onMouseLeave={() => setSpeed(1)}
+      onPointerDown={() => setSpeed(0.15)}
+      onPointerUp={() => setSpeed(1)}
+      onPointerCancel={() => setSpeed(1)}
+    >
+      <motion.div style={{ x }} className="flex w-fit gap-6 pr-6">
+        {[...images, ...images].map((imgUrl, i) => (
+          <div key={i} className="w-[280px] md:w-[320px] h-[400px] md:h-[480px] bg-gray-50 rounded-[28px] border border-gray-100 p-2 flex flex-col justify-center items-center shadow-sm overflow-hidden shrink-0 relative transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+             <img src={imgUrl} alt={`Result Image ${(i % 8) + 1}`} className="w-full h-full object-cover rounded-[20px] pointer-events-none" />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Services() {
   return (
@@ -16,25 +68,7 @@ export default function Services() {
 
       <FadeIn delay={0.2} className="w-full">
         {/* Infinite CSS marquee for results screenshots */}
-        <div className="relative flex overflow-x-hidden w-full max-w-[1000px] mx-auto pb-12 group mask-image-fade">
-          <div className="flex gap-6 animate-[scroll_30s_linear_infinite] group-hover:[animation-play-state:paused]">
-            {[1,2,3,4,5,6,7,8].map((i) => (
-              <div key={i} className="min-w-[280px] md:min-w-[320px] aspect-[9/16] bg-gray-50 rounded-[28px] border border-gray-100 p-4 flex flex-col justify-center items-center text-gray-400 shadow-sm overflow-hidden shrink-0 relative transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                 <div className="absolute inset-0 bg-gradient-to-t from-gray-100/80 to-transparent"></div>
-                 <span className="font-mono text-xs tracking-widest uppercase z-10 text-gray-500">[Result Image {i}]</span>
-              </div>
-            ))}
-          </div>
-          {/* Duplicate for seamless infinite loop */}
-          <div className="flex gap-6 animate-[scroll_30s_linear_infinite] group-hover:[animation-play-state:paused] absolute top-0 left-full pl-6">
-            {[1,2,3,4,5,6,7,8].map((i) => (
-              <div key={`dup-${i}`} className="min-w-[280px] md:min-w-[320px] aspect-[9/16] bg-gray-50 rounded-[28px] border border-gray-100 p-4 flex flex-col justify-center items-center text-gray-400 shadow-sm overflow-hidden shrink-0 relative transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                 <div className="absolute inset-0 bg-gradient-to-t from-gray-100/80 to-transparent"></div>
-                 <span className="font-mono text-xs tracking-widest uppercase z-10 text-gray-500">[Result Image {i}]</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Marquee />
       </FadeIn>
 
       <FadeIn delay={0.3} className="mt-8 flex justify-center">
