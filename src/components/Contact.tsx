@@ -1,7 +1,10 @@
 import { FadeIn } from './FadeIn';
 import { Star } from 'lucide-react';
+import { useCalendly } from '../context/CalendlyContext';
 
 export default function Contact() {
+  const { openCalendly } = useCalendly();
+
   return (
     <section id="contact" className="py-24 px-4 md:px-8 max-w-[1200px] mx-auto w-full text-center relative mb-16">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-gray-100 rounded-full blur-[120px] -z-10" />
@@ -26,9 +29,9 @@ export default function Contact() {
         </p>
 
         <div className="flex flex-col items-center gap-6">
-          <a href="https://calendly.com/rishabhar1974/30min" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto">
+          <button onClick={openCalendly} className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto cursor-pointer">
             Apply To Work With Us
-          </a>
+          </button>
 
           <div className="flex flex-col items-center gap-2 mt-2">
             <div className="flex items-center gap-1 text-[#0a0a0a]">

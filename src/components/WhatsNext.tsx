@@ -1,6 +1,9 @@
 import { FadeIn } from './FadeIn';
+import { useCalendly } from '../context/CalendlyContext';
 
 export default function WhatsNext() {
+  const { openCalendly } = useCalendly();
+
   return (
     <section className="py-24 px-4 md:px-8 max-w-[1000px] mx-auto w-full text-center">
       <FadeIn className="flex flex-col items-center">
@@ -44,9 +47,9 @@ export default function WhatsNext() {
         <p className="text-gray-500 text-[16px] md:text-[18px] font-medium">
           Minimum revenue of ₹5 Lakh/month required to apply.
         </p>
-        <a href="https://calendly.com/rishabhar1974/30min" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto">
+        <button onClick={openCalendly} className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto cursor-pointer">
           Apply To Work With Us
-        </a>
+        </button>
       </FadeIn>
     </section>
   );

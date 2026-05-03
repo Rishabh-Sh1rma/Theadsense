@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useCalendly } from '../context/CalendlyContext';
 
 export default function Navbar() {
+  const { openCalendly } = useCalendly();
+
   return (
     <motion.div 
       initial={{ y: -50, opacity: 0 }}
@@ -13,7 +16,7 @@ export default function Navbar() {
         
         {/* Left Section */}
         <div className="flex items-center gap-4">
-          <a href="#" className="flex items-center justify-center font-bold text-lg tracking-tight text-black ml-2 hover:opacity-70 transition-opacity">
+          <a href="/#" className="flex items-center justify-center font-bold text-lg tracking-tight text-black ml-2 hover:opacity-70 transition-opacity">
             theadsense
           </a>
         </div>
@@ -21,16 +24,16 @@ export default function Navbar() {
         {/* Right Section */}
         <div className="flex items-center gap-1.5">
           <div className="hidden md:flex items-center gap-6 mr-4 text-[13px] font-medium text-gray-900 tracking-tight">
-            <a href="#services" className="hover:text-gray-500 transition-colors">Services</a>
-            <a href="#casestudies" className="hover:text-gray-500 transition-colors">Our Work</a>
-            <a href="#whyus" className="hover:text-gray-500 transition-colors">Why Us</a>
-            <a href="#process" className="hover:text-gray-500 transition-colors">Process</a>
-            <a href="#faq" className="hover:text-gray-500 transition-colors">FAQ</a>
+            <a href="/#services" className="hover:text-gray-500 transition-colors">Services</a>
+            <a href="/#casestudies" className="hover:text-gray-500 transition-colors">Our Work</a>
+            <a href="/#whyus" className="hover:text-gray-500 transition-colors">Why Us</a>
+            <a href="/#process" className="hover:text-gray-500 transition-colors">Process</a>
+            <a href="/#faq" className="hover:text-gray-500 transition-colors">FAQ</a>
           </div>
           
-          <a href="https://calendly.com/rishabhar1974/30min" target="_blank" rel="noreferrer" className="bg-[#0a0a0a] text-white px-6 py-2.5 rounded-full text-[13px] font-medium hover:bg-gray-800 transition-colors flex items-center justify-center whitespace-nowrap shadow-sm hover:scale-105 transform duration-200">
+          <button onClick={openCalendly} className="bg-[#0a0a0a] text-white px-6 py-2.5 rounded-full text-[13px] font-medium hover:bg-gray-800 transition-colors flex items-center justify-center whitespace-nowrap shadow-sm hover:scale-105 transform duration-200 cursor-pointer">
             Book a call
-          </a>
+          </button>
         </div>
 
       </nav>

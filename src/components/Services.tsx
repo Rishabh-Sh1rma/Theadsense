@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useAnimationFrame, useMotionValue, useTransform } from 'motion/react';
 import { FadeIn } from './FadeIn';
+import { useCalendly } from '../context/CalendlyContext';
 
 const images = [
   "https://i.ibb.co/Z6YphM8n/Whats-App-Image-2026-05-02-at-10-47-35-PM.jpg",
@@ -53,6 +54,8 @@ function Marquee() {
 }
 
 export default function Services() {
+  const { openCalendly } = useCalendly();
+
   return (
     <section id="services" className="py-24 px-4 md:px-8 max-w-[1200px] mx-auto w-full text-center">
       <FadeIn className="flex flex-col items-center">
@@ -72,9 +75,9 @@ export default function Services() {
       </FadeIn>
 
       <FadeIn delay={0.3} className="mt-8 flex justify-center">
-        <a href="https://calendly.com/rishabhar1974/30min" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto">
+        <button onClick={openCalendly} className="inline-flex items-center justify-center bg-[#0a0a0a] text-white px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-semibold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1 duration-200 hover:shadow-xl w-full sm:w-auto cursor-pointer">
           Book a call today
-        </a>
+        </button>
       </FadeIn>
     </section>
   );
