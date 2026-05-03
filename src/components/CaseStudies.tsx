@@ -40,20 +40,20 @@ function ChartMockup({ data, yLabel, formatValue }: any) {
         TIME
       </div>
       
-      <div className="w-full h-full ml-6">
+      <div className="w-full h-full ml-4">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 30, right: 30, left: 0, bottom: 10 }}>
             <CartesianGrid stroke="#ffffff10" vertical={false} />
             <XAxis dataKey="name" hide />
-            <YAxis hide domain={['dataMin - 10', 'dataMax + 10']} />
+            <YAxis hide domain={[0, 'auto']} />
             <Line 
               type="monotone" 
               dataKey="value" 
-              stroke="#ffffff60" 
-              strokeWidth={2} 
+              stroke="rgba(255, 255, 255, 0.4)" 
+              strokeWidth={3} 
               dot={renderCustomDot}
               activeDot={false}
-              isAnimationActive={true}
+              isAnimationActive={false}
             />
           </LineChart>
         </ResponsiveContainer>
