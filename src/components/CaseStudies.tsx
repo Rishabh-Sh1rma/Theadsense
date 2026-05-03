@@ -30,18 +30,21 @@ function ChartMockup({ data, yLabel, formatValue }: any) {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-b from-[#031e1c] to-[#010707] relative p-6 pr-8 pb-10 flex flex-col justify-end">
+    <div 
+      className="absolute inset-0 w-full h-full p-4 sm:p-6 pr-6 sm:pr-8 pb-8 sm:pb-10 flex flex-col justify-end overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #031e1c 0%, #010707 100%)' }}
+    >
       {/* Y Axis Label */}
-      <div className="absolute top-1/2 left-2 -translate-y-1/2 -rotate-90 text-gray-400 text-[10px] sm:text-[11px] font-mono tracking-[0.3em] uppercase whitespace-nowrap">
+      <div className="absolute top-1/2 left-2 sm:left-4 -translate-y-1/2 -rotate-90 text-gray-400 text-[9px] sm:text-[11px] font-mono tracking-[0.3em] uppercase whitespace-nowrap">
         {yLabel}
       </div>
       {/* X Axis Label */}
-      <div className="absolute bottom-3 left-0 w-full text-center text-gray-400 text-[10px] sm:text-[11px] font-mono tracking-[0.3em] uppercase">
+      <div className="absolute bottom-2 sm:bottom-3 left-0 w-full text-center text-gray-400 text-[9px] sm:text-[11px] font-mono tracking-[0.3em] uppercase">
         TIME
       </div>
       
-      <div className="w-full h-full ml-4">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="flex-1 w-full h-full ml-4 min-h-[100px]">
+        <ResponsiveContainer width="99%" height="100%">
           <LineChart data={data} margin={{ top: 30, right: 30, left: 0, bottom: 10 }}>
             <CartesianGrid stroke="#ffffff10" vertical={false} />
             <XAxis dataKey="name" hide />
